@@ -1,0 +1,46 @@
+name: Build StartLink APKs
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: تحميل ملفات المشروع
+        uses: actions/checkout@v4
+
+      - name: تثبيت Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: استخراج ملفات المشروع
+        run: |
+          unzip -q StartLink_Source.zip -d extracted
+          mkdir -p output
+
+      - name: بناء التطبيقات الثلاثة
+        run: |
+          for app in client business admin; do
+            name="startlink_$app"
+
+            flutter create --platforms=android --org dz.startlink --project-name "$name" "build_$app"
+
+            cp "extracted/StartLink_Source/apps/$app/lib/main.dart" "build_$app/lib/main.dart"
+
+            cd "build_$app"
+            flutter pub get
+            flutter build apk --release
+            cp build/app/outputs/flutter-apk/app-release.apk "../output/StartLink-$app.apk"
+            cd ..
+          done
+
+      - name: حفظ ملفات APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: StartLink-APKs
+          path: output/*.apk
