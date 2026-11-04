@@ -1,0 +1,49 @@
+name: Build StartLink APKs
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: تحميل المشروع
+        uses: actions/checkout@v4
+
+      - name: تثبيت Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: بناء التطبيقات
+        run: |
+          mkdir -p output
+
+          for role in client business admin; do
+            case "$role" in
+              client) appname="startlink_client" ;;
+              business) appname="startlink_business" ;;
+              admin) appname="startlink_admin" ;;
+            esac
+
+            flutter create --platforms=android --org dz.startlink --project-name "$appname" "build_$role"
+
+            cp "apps/$role/lib/main.dart" "build_$role/lib/main.dart"
+
+            cd "build_$role"
+            flutter pub get
+            flutter build apk --release
+
+            cp build/app/outputs/flutter-apk/app-release.apk "../output/StartLink-$role.apk"
+            cd ..
+          done
+
+      - name: حفظ التطبيقات
+        uses: actions/upload-artifact@v4
+        with:
+          name: StartLink-APKs
+          path: output/*.apk
