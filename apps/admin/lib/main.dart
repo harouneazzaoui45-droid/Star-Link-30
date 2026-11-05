@@ -40,15 +40,15 @@ class _AdminHomeState extends State<AdminHome> {
   String search = '';
 
   final List<Map<String, String>> customers = [
-    {'name': 'أحمد محمد', 'phone': '0550000001', 'status': 'نشط'},
-    {'name': 'محمد علي', 'phone': '0550000002', 'status': 'نشط'},
-    {'name': 'يوسف خالد', 'phone': '0550000003', 'status': 'معلق'},
+    {'name': ' يانيس 'محمدphone': '0550000001', 'status': 'نشط'},
+    {'name': 'بوجمعة سيد 'يوسفف'لي', 'phone': '0550000002', 'status': 'نشط'},
+    {'name'لعياط عمادالدين خالد'', 'phone': '0550000003', 'status': 'معلق'},
   ];
 
   final List<Map<String, String>> businesses = [
-    {'name': 'مؤسسة المستقبل', 'type': 'تكنولوجيا', 'status': 'مقبولة'},
-    {'name': 'مؤسسة الإبداع', 'type': 'خدمات', 'status': 'قيد المراجعة'},
-    {'name': 'مؤسسة النجاح', 'type': 'تجارة', 'status': 'مقبولة'},
+    {'name': 'مؤسسة المستقبل', 'type':'تكنولوجيا'', 'status': 'مقبولة'},
+    {'name': 'مؤسسة الإبداع', 'type':التطبيقية'', 'status': 'قيد المراجعة'},
+    {'name': 'مؤسسة النجاح', 'type':بيولوجيا'', 'status': 'مقبولة'},
   ];
 
   final List<Map<String, String>> requests = [
@@ -59,7 +59,8 @@ class _AdminHomeState extends State<AdminHome> {
 
   final List<String> titles = [
     'لوحة التحكم',
-    'إدارة الزبائن',
+    'إدارة الزبائن',starlink_....1layat-"imad"
+    
     'إدارة المؤسسات',
     'إدارة الطلبات',
   ];
@@ -87,11 +88,10 @@ class _AdminHomeState extends State<AdminHome> {
               controller: extraController,
               decoration: InputDecoration(
                 labelText: selectedIndex == 1
-                    ? 'رقم الهاتف'
+                    ?'ر0673739060''
                     : selectedIndex == 2
                         ? 'نوع النشاط'
-                        : 'اسم الزبون',
-                border: const OutlineInputBorder(),
+                        : client/imad'                border: const OutlineInputBorder(),
               ),
             ),
           ],
